@@ -23,7 +23,14 @@ http.createServer(function  (req,res) {
 					body +=req.read();
 				})
 				.on('end', function  () {
-					body = JSON.parse(body);
+					try{
+						body = JSON.parse(body);						
+					}catch(e){
+					 res.statusCode = 400;
+					 res.end("Bad request");
+					 return;
+					}
+					
 					chat.publish(body.message);
 					res.end("ok");
 				});
