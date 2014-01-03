@@ -2,7 +2,10 @@ nodejs-long-polling
 ===================
 Chat long-polling, read POST
 
-For start
+## Getting started
 
+```
 node server
+```
 
+Open http://localhost:3000 on your browser.
