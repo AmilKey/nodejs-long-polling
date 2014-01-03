@@ -17,7 +17,16 @@ http.createServer(function  (req,res) {
 			break;
 
 		case '/publish':
-		chat.publish("...");
+			var body = '';
+			req
+				.on('readable', function  () {
+					body +=req.read();
+				})
+				.on('end', function  () {
+					body = JSON.parse(body);
+					chat.publish(body.message);
+					res.end("ok");
+				});
 			break;
 
 		default:
