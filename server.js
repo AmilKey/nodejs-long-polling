@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+var chat = require('./js/chat');
 
 http.createServer(function  (req,res) {
 
@@ -12,9 +13,11 @@ http.createServer(function  (req,res) {
 			break;
 
 		case '/subscribe':
+			chat.subscribe(req,res);
 			break;
 
 		case '/publish':
+		chat.publish("...");
 			break;
 
 		default:
