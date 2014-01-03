@@ -21,6 +21,11 @@ http.createServer(function  (req,res) {
 			req
 				.on('readable', function  () {
 					body +=req.read();
+
+					if (body.length > 1e4) {
+						res.statusCode = 413;
+						res.end("Your message is too big");
+					};
 				})
 				.on('end', function  () {
 					try{
@@ -30,7 +35,7 @@ http.createServer(function  (req,res) {
 					 res.end("Bad request");
 					 return;
 					}
-					
+
 					chat.publish(body.message);
 					res.end("ok");
 				});
